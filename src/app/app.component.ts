@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core'; //on importe Component de '@angular/core'
+import { POKEMONS } from './mock-pokemon-list';//🚨
+import { Pokemon } from './pokemon';//🚨
 
 @Component({
   selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
-  `,
-  styles: []
+  templateUrl: 'app.component.html',
+  //`<h1>Liste de pokemon</h1> PAS PRATIQUE CAR RISQUE DE SATURATION
+  //<p>Ceci est un paragraphe</p>`
+
+ 
 })
-export class AppComponent {
-  title = 'ng-pokemon-app';
+export class AppComponent implements OnInit {
+  pokemons : Pokemon[] = POKEMONS; //imposition de liste 
+  pokemonSelected: Pokemon|undefined;
+
+  ngOnInit() {
+    console.table(this.pokemons);
+    //this.selectPokemon(this.pokemons[0]);//selection avec indice dans le tab
+  }
+
+  selectPokemon(pokemon : Pokemon){ //on fait appel aux propriétés qu'on a cree dans le fichier pokemon.ts
+    //const id = +pokemonId;
+    //const pokemon :Pokemon|undefined = this.pokemons.find(pokemon => pokemon.id == +pokemonId);//const index: number= +(event.target as HTMLInputElement).value //cast la balise html du dom a ou a lieu l'event //on a remplace la recherche par id avec un index
+    if(pokemon){
+      console.log(`Vous avez demand ce pokemon ${pokemon.name}`);
+      this.pokemonSelected=pokemon;
+    }else{
+      console.log(`Vous avez demandé un pokemon qui n'existe pas`); 
+      this.pokemonSelected = pokemon; 
+    }
+    //console.log(`Vous avez cliqué sur ce pokemon ${pokemon.name}`); 
+    //console.log('Vous avez cliqué sur ce pokemon' + pokemonName);//ancienne methode
+  }
 }

@@ -1,0 +1,54 @@
+
+<!--<h1 class="center">Liste de pokemon</h1> interpolation-->
+<div class='container'>
+    <div class="row">
+        <div *ngFor='let pokemon of pokemons' class="col m4 s6"> <!--directive structurel-->
+            <div class="card horizontal" (click)="selectPokemon(pokemon)" pkmnBorderCard>
+                <div class="card-image">
+                    <img [src]="pokemon.picture">
+                </div>
+                <div class="card-stacked">  
+                    <div class="card-content">
+                        <p>{{ pokemon.name }}</p>
+                        <p><small>{{ pokemon.created | date:"dd/MM/yy" }}</small></p>
+                        <span 
+                            *ngFor="let type of pokemon.types" class="{{ type | pokemonTypeColor}}">
+                            {{type}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>  
+</div>
+
+<!--<input
+ #input 
+    (keyup.enter)="selectPokemon(input.value)" 
+    type="number"--> 
+
+<!--(click)=""selectPokemon($event) et enter cest pour le touche entrer Pseudo evement angular-->
+<!--#input variable réferencé-->
+<!--(keyup) permet de remonter l'info de l'utilisateur dans le champs inpu.value-->
+<!--<p *ngIf="pokemonSelected">
+    vous avez selectionné le pokemon  :{{pokemonSelected?.name}}
+</p><!--? permet de ne pas renvoyer d'erreur et renvoie rien *ngIf permet de renvoie seulement si un pokemon est trouver sinon on eneleve conditionnel-->
+<!--<p *ngIf="!pokemonSelected">
+    Aucun Pokemon n'a été trouvé pour le moment. 
+</p>-->
+
+
+<!--au lieu de ca : <p>{{ pokemons[0].name }}</p> 
+<p>{{ pokemons[1].name }}</p>
+<p>{{ pokemons[2].name }}</p>
+<p>{{ pokemons[3].name }}</p>
+<p>{{ pokemons[4].name }}</p>
+<p>{{ pokemons[5].name }}</p>
+<p>{{ pokemons[6].name }}</p>
+<p>{{ pokemons[7].name }}</p>
+<p>{{ pokemons[8].name }}</p>
+<p>{{ pokemons[9].name }}</p>
+<p>{{ pokemons[10].name }}</p>
+<p>{{ pokemons[11].name }}</p>-->
+
+
